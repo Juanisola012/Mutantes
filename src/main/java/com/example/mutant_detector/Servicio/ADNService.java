@@ -77,4 +77,5 @@ public class ADNService {
         }
         return countSequences(diagonal.toString());
     }
+
 }
