@@ -3,13 +3,17 @@ package com.example.mutant_detector;
 import com.example.mutant_detector.Repositorio.ADNRepository;
 import com.example.mutant_detector.Servicio.ADNService;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@SpringBootTest
+import static org.junit.jupiter.api.Assertions.*;
+
+
+@SpringBootTest(classes = MutantDetectorApplication.class)
+@ExtendWith(SpringExtension.class)
 public class ADNServiceTests {
 	@Autowired
 	private ADNService adnService; // Inyectar el servicio
