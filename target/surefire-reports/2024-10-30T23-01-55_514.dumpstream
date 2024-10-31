@@ -1,5 +1,0 @@
-# Created at 2024-10-30T23:01:55.706
-Boot Manifest-JAR contains absolute paths in classpath 'D:\FACULTEISHOOON 2.0\Desarrolleishon de Sofwareishon\Mutantes\mutant-detector\mutant-detector\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-'other' has different root
-

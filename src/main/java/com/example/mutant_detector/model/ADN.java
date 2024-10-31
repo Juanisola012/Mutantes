@@ -1,9 +1,7 @@
 package com.example.mutant_detector.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 @Entity
 public class ADN {
     @Id
@@ -11,6 +9,7 @@ public class ADN {
     private Long id;
     private String sequence;
 
+    @Column(name = "is_mutant")
     private boolean isMutant;
 
     public ADN(){
