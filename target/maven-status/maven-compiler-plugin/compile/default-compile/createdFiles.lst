@@ -1,0 +1,6 @@
+com\example\mutant_detector\Servicio\ADNService.class
+com\example\mutant_detector\Controller\ADNController.class
+com\example\mutant_detector\MutantDetectorApplication.class
+com\example\mutant_detector\model\ADN.class
+com\example\mutant_detector\Repositorio\ADNRepository.class
+com\example\mutant_detector\request\DNARequest.class
