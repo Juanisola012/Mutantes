@@ -5,11 +5,27 @@ import com.example.mutant_detector.model.ADN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class ADNService {
     @Autowired
     private ADNRepository adnRepository;
+    //estadisticas
+    public Map<String, Object> getStatistics() {
+        long countMutantDna = adnRepository.countByIsMutant(true);
+        long countHumanDna = adnRepository.countByIsMutant(false);
+        double ratio = countHumanDna > 0 ? (double) countMutantDna / countHumanDna : 0.0;
 
+        Map<String, Object> stats = new HashMap<>();
+        stats.put("count_mutant_dna", countMutantDna);
+        stats.put("count_human_dna", countHumanDna);
+        stats.put("ratio", ratio);
+
+        return stats;
+    }
+    //logica para mutatnes y humanos
     public boolean isMutant(String[] dna) {
         int count = 0;
         int length = dna.length;
@@ -21,20 +37,28 @@ public class ADNService {
 
             count += horizontalCount;
             count += verticalCount;
-
-            System.out.println("Fila " + i + ": secuencias horizontales=" + horizontalCount + ", secuencias verticales=" + verticalCount);
         }
 
         // Contar secuencias diagonales
         int diagonalCount = countDiagonalSequences(dna);
         count += diagonalCount;
 
-        System.out.println("Secuencias diagonales=" + diagonalCount);
-        System.out.println("Total de secuencias encontradas=" + count);
+        boolean isMutant = count > 2; // Más de dos secuencias indican mutante
 
-        return count > 2; // Más de dos secuencias indican mutante
+        // Guardar en la base de datos
+        saveADN(dna, isMutant); // Llama al método para guardar la secuencia
+
+        return isMutant;
     }
+    private void saveADN(String[] dna, boolean isMutant) {
+        ADN adn = new ADN();
+        adn.setSequence(String.join(",", dna)); // Guarda la secuencia como un String
+        adn.setMutant(isMutant); // Guarda el estado de mutante o humano
+        adnRepository.save(adn); // Guarda el ADN en la base de datos
 
+        // Agregar registro de depuración
+        System.out.println("Guardando ADN: " + String.join(",", dna) + ", Mutante: " + isMutant);
+    }
     private int countSequences(String sequence) {
         int count = 0;
         int consecutive = 0;
@@ -75,7 +99,6 @@ public class ADNService {
                 count += mainDiagonalCount;
                 count += secondaryDiagonalCount;
 
-                System.out.println("Diagonal desde (" + i + ", " + j + "): secuencia principal=" + mainDiagonalCount + ", secuencia secundaria=" + secondaryDiagonalCount);
             }
         }
         return count;

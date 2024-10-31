@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/mutant")
@@ -23,6 +25,11 @@ public class ADNController {
     public ResponseEntity<Void> isMutant(@RequestBody DNARequest dnaRequest) {
         boolean mutant = adnService.isMutant(dnaRequest.getMutantDNA());
         return mutant ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+    @GetMapping("/stats")
+    public ResponseEntity<Map<String, Object>> getStats() {
+        Map<String, Object> stats = adnService.getStatistics();
+        return ResponseEntity.ok(stats);
     }
 
 

@@ -9,12 +9,29 @@ public class ADN {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String [] sequence;
+    private String sequence;
+
+    private boolean isMutant;
 
     public ADN(){
 
     }
-    public ADN(String[] sequence) {
+
+    public boolean isMutant() {
+        return isMutant;
+    }
+
+    public void setMutant(boolean mutant) {
+        isMutant = mutant;
+    }
+
+    public ADN(Long id, String sequence, boolean isMutant) {
+        this.id = id;
+        this.sequence = sequence;
+        this.isMutant = isMutant;
+    }
+
+    public ADN(String sequence) {
         this.sequence = sequence;
     }
 
@@ -26,11 +43,11 @@ public class ADN {
         this.id = id;
     }
 
-    public String[] getSequence() {
+    public String getSequence() {
         return sequence;
     }
 
-    public void setSequence(String[] sequence) {
+    public void setSequence(String sequence) {
         this.sequence = sequence;
     }
 }
