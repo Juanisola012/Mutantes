@@ -26,7 +26,7 @@ public class ADNService {
         return stats;
     }
     //logica para mutatnes y humanos
-    public boolean isMutant(String[] dna) {
+    public Boolean isMutant(String[] dna) {
         int count = 0;
         int length = dna.length;
 
@@ -43,14 +43,14 @@ public class ADNService {
         int diagonalCount = countDiagonalSequences(dna);
         count += diagonalCount;
 
-        boolean isMutant = count > 2; // Más de dos secuencias indican mutante
+        Boolean isMutant = count > 2; // Más de dos secuencias indican mutante
 
         // Guardar en la base de datos
         saveADN(dna, isMutant); // Llama al método para guardar la secuencia
 
         return isMutant;
     }
-    private void saveADN(String[] dna, boolean isMutant) {
+    private void saveADN(String[] dna, Boolean isMutant) {
         ADN adn = new ADN();
         adn.setSequence(String.join(",", dna)); // Guarda la secuencia como un String
         adn.setMutant(isMutant); // Guarda el estado de mutante o humano
