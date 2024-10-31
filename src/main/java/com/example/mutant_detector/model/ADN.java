@@ -10,21 +10,21 @@ public class ADN {
     private String sequence;
 
     @Column(name = "is_mutant")
-    private Boolean isMutant;
+    private boolean isMutant;
 
     public ADN(){
 
     }
 
-    public Boolean isMutant() {
+    public boolean isMutant() {
         return isMutant;
     }
 
-    public void setMutant(Boolean mutant) {
+    public void setMutant(boolean mutant) {
         isMutant = mutant;
     }
 
-    public ADN(Long id, String sequence, Boolean isMutant) {
+    public ADN(Long id, String sequence, boolean isMutant) {
         this.id = id;
         this.sequence = sequence;
         this.isMutant = isMutant;

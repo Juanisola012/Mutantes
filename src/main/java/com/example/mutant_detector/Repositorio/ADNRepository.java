@@ -4,5 +4,5 @@ import com.example.mutant_detector.model.ADN;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ADNRepository extends JpaRepository<ADN, Long> {
-    long countByIsMutant(Boolean isMutant);
+    long countByIsMutant(boolean isMutant);
 }
