@@ -13,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/mutant")
+@CrossOrigin("*")
 public class ADNController {
 
     private final ADNService adnService;
